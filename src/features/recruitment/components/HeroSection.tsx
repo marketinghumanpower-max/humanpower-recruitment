@@ -1,0 +1,43 @@
+import heroImg from '@/assets/hero.png'
+import { useTranslation } from 'react-i18next'
+import { JobSearchBar } from './JobSearchBar'
+
+export const HeroSection = () => {
+  const { t } = useTranslation('recruitment')
+
+  return (
+    <section className="relative bg-[#d70018] text-white pt-10 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background Subtle Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto text-center space-y-6">
+        {/* Title */}
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight drop-shadow-sm">
+          {t('hero.title')}
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-sm sm:text-base md:text-lg text-white/90 font-medium">
+          {t('hero.subtitle')}
+        </p>
+
+        {/* Banner Image Showcase */}
+        <div className="pt-2 pb-6 max-w-4xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 bg-black/20">
+            <img
+              src={heroImg}
+              alt="MWG Store Workplace"
+              className="w-full h-auto max-h-[380px] object-cover object-center transform hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+        </div>
+
+        {/* Search Bar Container */}
+        <div className="pt-2">
+          <JobSearchBar />
+        </div>
+      </div>
+    </section>
+  )
+}
+
