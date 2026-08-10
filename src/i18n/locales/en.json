@@ -1,0 +1,158 @@
+{
+  "common": {
+    "home": "Home",
+    "candidates": "Candidates",
+    "copyright": "All rights reserved.",
+    "toggleTheme": "Toggle Store Theme",
+    "currentTheme": "Current UI Theme"
+  },
+  "home": {
+    "welcome": "Welcome to HumanPower Recruitment Project!",
+    "description": "The project has been successfully set up adhering strictly to senior React conventions.",
+    "techStackTitle": "Tech Stack",
+    "structureTitle": "Directory Structure"
+  },
+  "recruitment": {
+    "header": {
+      "recruitment": "RECRUITMENT",
+      "findJob": "Find Jobs",
+      "findJobBySpecialty": "Jobs by Specialty",
+      "findJobByProvince": "Jobs by Province",
+      "internalJobs": "Internal Jobs",
+      "aboutMwg": "About MWG",
+      "aboutOverview": "Overview",
+      "aboutBoardOfDirectors": "Board of Directors",
+      "lifeAtMwg": "Life at MWG",
+      "lifeEnvironment": "Working Environment",
+      "lifeCulture": "Corporate Culture",
+      "careerGuide": "Career Guide",
+      "applicationResults": "Application Results"
+    },
+    "hero": {
+      "title": "World of Jobs, Fastest Nationwide",
+      "subtitle": "27,744 jobs waiting for you at MWG"
+    },
+    "search": {
+      "industry": "Industry",
+      "location": "Nationwide",
+      "positionPlaceholder": "Job position...",
+      "searchBtn": "Search Jobs",
+      "industries": {
+        "sales": "Sales / Cashier",
+        "warehouse": "Warehouse / Logistics",
+        "it": "Information Technology (IT)",
+        "hr": "Admin - Human Resources",
+        "marketing": "Marketing / Communications",
+        "technical": "Technical / Warranty"
+      },
+      "locations": {
+        "hcm": "Ho Chi Minh City",
+        "hanoi": "Ha Noi",
+        "danang": "Da Nang",
+        "cantho": "Can Tho",
+        "binhduong": "Binh Duong",
+        "dongnai": "Dong Nai",
+        "haiphong": "Hai Phong"
+      }
+    },
+    "locations": {
+      "allLocations": "All Locations"
+    },
+    "brand": {
+      "titlePrefix": "Jobs by ",
+      "titleHighlight": "brand"
+    },
+    "about": {
+      "kicker": "VISION 2030",
+      "title": "THIS IS MWG - THE PRIDE OF VIETNAM",
+      "point1": "Leading multi-sector retail group in the region.",
+      "point2": "Happy working environment, competitive income.",
+      "point3": "Leading in customer service quality.",
+      "point4": "Positive contribution to community and society.",
+      "point5": "Continuous innovation, advanced technology application."
+    },
+    "bod": {
+      "kicker": "MWG LEADERSHIP",
+      "titlePrefix": "Board of ",
+      "titleHighlight": "Directors",
+      "subtitle": "Experienced and visionary leadership guiding strategic growth and sustainable development for Mobile World Group.",
+      "role1": "Chairman of the Board",
+      "role2": "Board Member / CEO",
+      "role3": "Independent Board Member",
+      "quote1": "We build an environment where every employee has equal opportunities to thrive and grow.",
+      "quote2": "Customer satisfaction and employee happiness are our ultimate compasses for action.",
+      "quote3": "Innovation and disciplined execution are the master keys to extraordinary expansion."
+    },
+    "coreValues": {
+      "titlePrefix": "6 Core ",
+      "titleHighlight": "values",
+      "titleSuffix": " of MWG",
+      "item1": {
+        "title": "Dedicated to Customers",
+        "desc": "Put customers at the center of all thoughts and actions."
+      },
+      "item2": {
+        "title": "Honesty",
+        "desc": "Financial honesty. Honesty in all relationships."
+      },
+      "item3": {
+        "title": "Integrity",
+        "desc": "Do what you say, deliver on what was promised."
+      },
+      "item4": {
+        "title": "Teamwork",
+        "desc": "Always ready to support and collaborate for collective goals."
+      },
+      "item5": {
+        "title": "Passionate at Work",
+        "desc": "Enthusiastic, proactive, and decisive for best results."
+      },
+      "item6": {
+        "title": "Eager to Learn",
+        "desc": "Continuously improve knowledge, skills, and self-development."
+      }
+    },
+    "achievements": {
+      "titlePrefix": "Awards and ",
+      "titleHighlight": "achievements",
+      "viewMore": "View More",
+      "item1": {
+        "title": "Top 50 Best Listed Companies in Vietnam",
+        "sub": "Forbes Vietnam (Consecutive years)"
+      },
+      "item2": {
+        "title": "Top 10 Largest Private Enterprises in Vietnam",
+        "sub": "VNR500"
+      },
+      "item3": {
+        "title": "Best Companies to Work for in Asia",
+        "sub": "HR Asia Award"
+      },
+      "item4": {
+        "title": "No. 1 Retailer in Vietnam",
+        "sub": "Retail Asia Publishing"
+      },
+      "item5": {
+        "title": "Top 100 Best Places to Work in Vietnam",
+        "sub": "Anphabe"
+      }
+    },
+    "footer": {
+      "companyName": "Mobile World Investment Corporation",
+      "headquarters": "Headquarters in HCMC:",
+      "address": "MWG Building, Lot T2-1.2, D1 St, High-Tech Park, Tan Phu Ward, Thu Duc City, Ho Chi Minh City.",
+      "viewMap": "View map",
+      "aboutTitle": "ABOUT COMPANY",
+      "aboutIntro": "Company Introduction",
+      "aboutBenefits": "Benefits & Welfare",
+      "aboutLife": "Life at MWG",
+      "aboutTerms": "Terms of Use",
+      "supportTitle": "SUPPORT",
+      "supportNewbies": "For New Candidates",
+      "supportProcess": "Recruitment Process",
+      "supportFaq": "FAQ",
+      "supportResults": "Check Application Status",
+      "followUs": "Follow us for updates:"
+    }
+  }
+}

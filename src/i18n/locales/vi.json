@@ -1,0 +1,158 @@
+{
+  "common": {
+    "home": "Trang chủ",
+    "candidates": "Ứng viên",
+    "copyright": "Tất cả các quyền được bảo lưu.",
+    "toggleTheme": "Đổi Theme Store",
+    "currentTheme": "Theme UI hiện tại"
+  },
+  "home": {
+    "welcome": "Chào mừng đến với Dự án HumanPower Recruitment!",
+    "description": "Dự án đã được thiết lập thành công theo đúng cấu trúc & quy ước senior React.",
+    "techStackTitle": "Tech Stack",
+    "structureTitle": "Cấu trúc thư mục"
+  },
+  "recruitment": {
+    "header": {
+      "recruitment": "TUYỂN DỤNG",
+      "findJob": "Tìm việc",
+      "findJobBySpecialty": "Việc làm theo chuyên môn",
+      "findJobByProvince": "Việc làm theo tỉnh",
+      "internalJobs": "Việc làm nội bộ",
+      "aboutMwg": "Về MWG",
+      "aboutOverview": "Giới thiệu chung",
+      "aboutBoardOfDirectors": "Hội đồng quản trị",
+      "lifeAtMwg": "Life at MWG",
+      "lifeEnvironment": "Môi trường làm việc",
+      "lifeCulture": "Văn hóa doanh nghiệp",
+      "careerGuide": "Hướng nghiệp",
+      "applicationResults": "Kết quả ứng tuyển"
+    },
+    "hero": {
+      "title": "Thế giới việc làm, nhanh nhất trên toàn quốc",
+      "subtitle": "27,744 công việc đang chờ bạn tại MWG"
+    },
+    "search": {
+      "industry": "Ngành nghề",
+      "location": "Toàn quốc",
+      "positionPlaceholder": "Vị trí tuyển dụng...",
+      "searchBtn": "Tìm việc",
+      "industries": {
+        "sales": "Bán hàng / Thu ngân",
+        "warehouse": "Kho bãi / Hậu cần",
+        "it": "Công nghệ thông tin (IT)",
+        "hr": "Hành chính - Nhân sự",
+        "marketing": "Marketing / Truyền thông",
+        "technical": "Kỹ thuật / Bảo hành"
+      },
+      "locations": {
+        "hcm": "TP. Hồ Chí Minh",
+        "hanoi": "Hà Nội",
+        "danang": "Đà Nẵng",
+        "cantho": "Cần Thơ",
+        "binhduong": "Bình Dương",
+        "dongnai": "Đồng Nai",
+        "haiphong": "Hải Phòng"
+      }
+    },
+    "locations": {
+      "allLocations": "Tất cả địa điểm"
+    },
+    "brand": {
+      "titlePrefix": "Việc làm theo ",
+      "titleHighlight": "thương hiệu"
+    },
+    "about": {
+      "kicker": "TẦM NHÌN 2030",
+      "title": "ĐÂY LÀ MWG - NIỀM TỰ HÀO CỦA VIỆT NAM",
+      "point1": "Tập đoàn bán lẻ đa ngành hàng đầu khu vực.",
+      "point2": "Môi trường làm việc hạnh phúc, thu nhập cạnh tranh.",
+      "point3": "Dẫn đầu về chất lượng dịch vụ khách hàng.",
+      "point4": "Đóng góp tích cực cho cộng đồng và xã hội.",
+      "point5": "Đổi mới không ngừng, ứng dụng công nghệ tiên tiến."
+    },
+    "bod": {
+      "kicker": "LÃNH ĐẠO MWG",
+      "titlePrefix": "Hội đồng ",
+      "titleHighlight": "Quản trị",
+      "subtitle": "Đội ngũ lãnh đạo bản lĩnh, giàu kinh nghiệm định hướng chiến lược và phát triển bền vững cho tập đoàn Thế Giới Di Động.",
+      "role1": "Chủ tịch Hội đồng Quản trị",
+      "role2": "Thành viên HĐQT / Tổng Giám Đốc",
+      "role3": "Thành viên HĐQT Độc lập",
+      "quote1": "Chúng tôi xây dựng môi trường mà mỗi nhân viên đều có cơ hội phát triển và làm giàu chính đáng.",
+      "quote2": "Luôn lấy sự hài lòng của khách hàng và hạnh phúc của nhân viên làm kim chỉ nam hành động.",
+      "quote3": "Đổi mới sáng tạo và thực thi kỷ luật là chìa khóa mở ra sự tăng trưởng vượt bậc."
+    },
+    "coreValues": {
+      "titlePrefix": "6 Giá trị ",
+      "titleHighlight": "cốt lõi",
+      "titleSuffix": " MWG",
+      "item1": {
+        "title": "Tận tâm với Khách hàng",
+        "desc": "Đặt khách hàng làm trung tâm trong mọi suy nghĩ và hành động của mình."
+      },
+      "item2": {
+        "title": "Trung thực",
+        "desc": "Trung thực về mặt tài chính. Trung thực trong các mối quan hệ."
+      },
+      "item3": {
+        "title": "Integrity",
+        "desc": "Nói gì làm nấy, làm đúng những gì đã hứa."
+      },
+      "item4": {
+        "title": "Đồng đội",
+        "desc": "Sẵn sàng hỗ trợ, hợp tác vì mục tiêu chung của tập thể."
+      },
+      "item5": {
+        "title": "Máu lửa trong công việc",
+        "desc": "Nhiệt huyết, chủ động và quyết liệt để đạt kết quả tốt nhất."
+      },
+      "item6": {
+        "title": "Ham học hỏi",
+        "desc": "Không ngừng tự nâng cao kiến thức, kỹ năng và hoàn thiện bản thân."
+      }
+    },
+    "achievements": {
+      "titlePrefix": "Giải thưởng và ",
+      "titleHighlight": "thành tựu",
+      "viewMore": "Xem Thêm",
+      "item1": {
+        "title": "Top 50 Công ty niêm yết tốt nhất Việt Nam",
+        "sub": "Forbes Vietnam (Nhiều năm liên tiếp)"
+      },
+      "item2": {
+        "title": "Top 10 Doanh nghiệp tư nhân lớn nhất Việt Nam",
+        "sub": "VNR500"
+      },
+      "item3": {
+        "title": "Môi trường làm việc tốt nhất Châu Á",
+        "sub": "HR Asia Award"
+      },
+      "item4": {
+        "title": "Nhà bán lẻ số 1 Việt Nam",
+        "sub": "Retail Asia Publishing"
+      },
+      "item5": {
+        "title": "Top 100 Nơi làm việc tốt nhất Việt Nam",
+        "sub": "Anphabe"
+      }
+    },
+    "footer": {
+      "companyName": "Công ty cổ phần Đầu tư Thế Giới Di Động",
+      "headquarters": "Trụ sở chính tại TP. Hồ Chí Minh:",
+      "address": "Tòa nhà MWG Lô T2-1.2, Đường D1, Khu Công Nghệ Cao, Phường Tân Phú, TP. Thủ Đức, TP. Hồ Chí Minh.",
+      "viewMap": "Xem bản đồ",
+      "aboutTitle": "VỀ CÔNG TY",
+      "aboutIntro": "Giới thiệu công ty",
+      "aboutBenefits": "Chính sách đãi ngộ",
+      "aboutLife": "Life at MWG",
+      "aboutTerms": "Điều khoản sử dụng",
+      "supportTitle": "HỖ TRỢ",
+      "supportNewbies": "Dành cho ứng viên mới",
+      "supportProcess": "Quy trình tuyển dụng",
+      "supportFaq": "Câu hỏi thường gặp",
+      "supportResults": "Kiểm tra kết quả Ứng tuyển",
+      "followUs": "Theo dõi chúng tôi để nhận tin mới:"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+# Senior React Engineer Rules
+
+Bạn là một Senior Frontend Engineer làm việc trên một dự án React hiện đại. Hãy luôn tuân thủ nghiêm ngặt cấu trúc thư mục, tech stack và các quy ước dưới đây khi viết, sửa hoặc review code.
+
+1. Tech Stack bắt buộc:
+- Framework: React 19 (dùng các API mới như use, Actions, useOptimistic khi phù hợp)
+- Build tool: Vite
+- Ngôn ngữ: TypeScript (strict mode, không dùng any tùy tiện)
+- Routing: React Router (data router / createBrowserRouter)
+- Server state: TanStack Query (React Query) — mọi gọi API phải qua useQuery/useMutation, không fetch trực tiếp trong component
+- Client state: Zustand — chỉ dùng cho state UI/global đơn giản, không thay thế TanStack Query cho server state
+- HTTP client: Axios (có instance dùng chung tại @/api/axiosClient, interceptor xử lý auth/token/error)
+- Styling: Tailwind CSS (utility-first, hạn chế CSS module/inline style)
+- UI Components: shadcn/ui (component có sẵn trong components/ui, tuỳ biến qua Tailwind, không sửa trực tiếp source gốc trừ khi cần thiết)
+- Form: React Hook Form kết hợp Zod (zodResolver) để validate
+- Lint/Format: ESLint + Prettier — code phải pass lint trước khi coi là hoàn thành
+
+2. Cấu trúc thư mục (bắt buộc tuân theo):
+src/
+├── api/            # Định nghĩa axios instance, các hàm gọi API theo module (vd: userApi.ts, authApi.ts)
+├── assets/         # Ảnh, font, icon tĩnh
+├── components/     # Component dùng chung, tái sử dụng nhiều nơi (bao gồm components/ui cho shadcn)
+├── features/       # Code theo tính năng (feature-based), mỗi feature có thể chứa components/hooks/api riêng
+├── hooks/          # Custom hooks dùng chung (không thuộc riêng 1 feature)
+├── i18n/           # Cấu hình đa ngôn ngữ (i18next) & file ngôn ngữ (locales/vi.json, locales/en.json)
+├── layouts/        # Layout components (MainLayout, AuthLayout, DashboardLayout...)
+├── router/         # Cấu hình React Router (routes.tsx, route guards)
+├── stores/         # Zustand stores
+├── types/          # Type/interface dùng chung toàn dự án
+└── utils/          # Hàm tiện ích thuần (formatDate, cn, validators...)
+
+Quy tắc đặt code:
+- Logic/component chỉ dùng cho 1 tính năng cụ thể → đặt trong features/<tên-feature>/
+- Component tái sử dụng ở ≥2 nơi hoặc là UI primitive → đặt trong components/
+- Mỗi feature con nên tự tổ chức theo cấu trúc tương tự: features/<feature>/components, features/<feature>/hooks, features/<feature>/api nếu cần
+- Không import chéo trực tiếp giữa 2 feature khác nhau; nếu cần chia sẻ logic, đưa lên hooks/, utils/, hoặc components/
+
+3. Quy ước code cụ thể:
+- API layer (api/): Tạo 1 axios instance duy nhất (axiosClient.ts) với baseURL, interceptor request/response. Mỗi module API là 1 file riêng, export các hàm async trả về Promise đã unwrap response.data. Không gọi axios trực tiếp trong component/hook.
+- Server state (TanStack Query): Đặt custom hooks useXxxQuery/useXxxMutation cạnh feature liên quan (features/<feature>/hooks/). Định nghĩa queryKey tập trung, tránh hardcode rải rác. Dùng invalidateQueries sau mutation để đồng bộ cache.
+- Client state (Zustand): Mỗi store là 1 file trong stores/, đặt tên theo domain (vd: authStore.ts, uiStore.ts). Store chỉ chứa state thuần UI/app, không cache dữ liệu server.
+- Form (React Hook Form + Zod): Schema Zod định nghĩa trong file riêng hoặc cạnh component form, dùng z.infer để lấy type. Luôn dùng zodResolver(schema) khi khởi tạo useForm.
+- Type (types/): Type dùng ở nhiều feature → đặt trong types/. Type chỉ dùng nội bộ 1 feature → khai báo ngay trong file/feature đó.
+- Styling: Ưu tiên class Tailwind, dùng hàm cn() (từ utils/) để merge className có điều kiện. Custom UI dựa trên component shadcn/ui có sẵn, không viết lại từ đầu nếu đã có sẵn trong components/ui.
+- Đặt tên & format: Component: PascalCase (UserCard.tsx). Hook: camelCase, tiền tố use (useAuth.ts). File util/type: camelCase hoặc kebab-case nhất quán theo convention hiện tại của repo. Luôn chạy qua ESLint + Prettier trước khi coi là xong, không để warning/error lint.
+
+4. Khi tạo tính năng mới:
+- Xác định tính năng thuộc features/<tên>/
+- Tạo API function trong api/ nếu cần gọi backend
+- Viết hook TanStack Query wrap API đó
+- Xây UI dùng shadcn/ui + Tailwind, tái sử dụng component chung từ components/
+- Nếu có form, dùng React Hook Form + Zod schema
+- Nếu cần state global, thêm vào Zustand store phù hợp (hoặc tạo store mới)
+- Đăng ký route trong router/
+- Kiểm tra lint/format trước khi hoàn tất
