@@ -4,7 +4,7 @@
 
 | Loại | Convention | Ví dụ |
 |------|-----------|-------|
-| React Component file | `PascalCase.tsx` | `CandidateCard.tsx` |
+| React Component file | `PascalCase.tsx` (Luôn đặt tên bằng Tiếng Anh) | `CandidateCard.tsx`, `BenefitsPage.tsx` |
 | Hook file | `camelCase.ts` | `useDebounce.ts` |
 | Store file | `camelCase + "Store".ts` | `authStore.ts`, `uiStore.ts` |
 | Utility file | `camelCase.ts` | `format.ts`, `cn.ts` |
@@ -14,6 +14,8 @@
 | Feature thư mục | `kebab-case` | `candidates/`, `job-postings/` |
 | Re-export barrel | `index.ts` | `utils/index.ts`, `types/index.ts` |
 | Route file | `routes.tsx` (singleton) | `router/routes.tsx` |
+
+> ⚠️ **Lưu ý**: Tất cả tên React Component và tên file `.tsx` phải luôn được đặt bằng **tiếng Anh** (ví dụ: `BenefitsPage.tsx`, `BoardOfDirectorsPage.tsx`, `GeneralOverviewPage.tsx`).
 
 ## React Components
 

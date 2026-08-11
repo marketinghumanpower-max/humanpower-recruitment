@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { ChevronDown, ChevronRight, Menu, X, Users } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
+import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import type { AppHeaderProps, NavItem } from './AppHeader.types'
@@ -11,42 +11,45 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
   const [mobileExpandedItem, setMobileExpandedItem] = useState<string | null>(null)
   const [mobileSubTab, setMobileSubTab] = useState<string | null>(null)
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
-  const [activeSubMenu, setActiveSubMenu] = useState<'specialty' | 'province' | 'internal'>('specialty')
+  const [activeSubMenu, setActiveSubMenu] = useState<'specialty' | 'province'>('specialty')
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { t } = useTranslation('recruitment')
+  const location = useLocation()
 
   const defaultItems: NavItem[] = [
     {
       label: t('header.findJob'),
-      to: '#search',
+      to: '/jobs',
       hasDropdown: true,
       isMegaDropdown: true,
       dropdownItems: [
-        { id: 'specialty', label: t('header.findJobBySpecialty'), to: '#specialty', hasSubMenu: true },
-        { id: 'province', label: t('header.findJobByProvince'), to: '#province', hasSubMenu: true },
-        { id: 'internal', label: t('header.internalJobs'), to: '#internal' },
+        { id: 'specialty', label: t('header.findJobBySpecialty'), to: '/jobs', hasSubMenu: true },
+        { id: 'province', label: t('header.findJobByProvince'), to: '/jobs', hasSubMenu: true },
+        { id: 'internal', label: t('header.internalJobs'), to: '/viec-lam-noi-bo' },
       ],
     },
     {
       label: t('header.aboutMwg'),
-      to: '#about',
+      to: '/gioi-thieu',
       hasDropdown: true,
       dropdownItems: [
-        { id: 'overview', label: t('header.aboutOverview'), to: '#about' },
-        { id: 'bod', label: t('header.aboutBoardOfDirectors'), to: '#board-of-directors' },
+        { id: 'overview', label: t('header.aboutOverview'), to: '/gioi-thieu' },
+        { id: 'bod', label: t('header.aboutBoardOfDirectors'), to: '/hoi-dong-quan-tri' },
       ],
     },
     {
       label: t('header.lifeAtMwg'),
-      to: '#life',
+      to: '/phuc-loi',
       hasDropdown: true,
       dropdownItems: [
-        { id: 'environment', label: t('header.lifeEnvironment'), to: '#life-environment' },
-        { id: 'culture', label: t('header.lifeCulture'), to: '#life-culture' },
+        { id: 'life-mwg', label: t('header.lifeMwg'), to: '/phuc-loi' },
+        { id: 'benefits', label: t('header.lifeBenefits'), to: '/phuc-loi' },
+        { id: 'advancement', label: t('header.lifeAdvancement'), to: '/thang-tien' },
+        { id: 'comeback', label: t('header.lifeComeback'), to: '#comeback' },
       ],
     },
-    { label: t('header.careerGuide'), to: '#career' },
-    { label: t('header.applicationResults'), to: '#results' },
+    { label: t('header.careerGuide'), to: '/huong-nghiep' },
+    { label: t('header.applicationResults'), to: '/ket-qua-ung-tuyen' },
   ]
 
   const itemsToRender = navItems || defaultItems
@@ -60,6 +63,30 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredItem(null)
     }, 150)
+  }
+
+  const isSubActive = (dropTo: string) => {
+    const currentPath = location.pathname
+    if (dropTo === '/gioi-thieu') {
+      return (
+        currentPath === '/gioi-thieu' ||
+        currentPath === '/gioi-thieu-chung' ||
+        currentPath === '/about'
+      )
+    }
+    if (dropTo === '/hoi-dong-quan-tri') {
+      return (
+        currentPath === '/hoi-dong-quan-tri' ||
+        currentPath === '/board-of-directors'
+      )
+    }
+    if (dropTo === '/phuc-loi') {
+      return currentPath === '/phuc-loi' || currentPath === '/benefits'
+    }
+    if (dropTo === '/thang-tien') {
+      return currentPath === '/thang-tien' || currentPath === '/advancement'
+    }
+    return currentPath === dropTo
   }
 
   const specialtyRows = [0, 1, 2, 3, 4, 5].flatMap((rowIdx) =>
@@ -86,12 +113,13 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
             return (
               <div
                 key={item.to + item.label}
-                className="relative"
+                className={item.isMegaDropdown ? 'static' : 'relative'}
                 onMouseEnter={() => handleMouseEnter(item.to)}
                 onMouseLeave={handleMouseLeave}
               >
                 <Link
                   to={item.to}
+                  onClick={() => setHoveredItem(null)}
                   className="hover:text-white transition-colors flex items-center gap-1 py-5"
                 >
                   <span>{item.label}</span>
@@ -115,25 +143,28 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
                       {/* Left Column - Sub Categories */}
                       <div className="w-52 bg-white border-r border-zinc-100 py-3 shrink-0">
                         {item.dropdownItems.map((dropItem) => {
-                          const subId = (dropItem.id || 'specialty') as 'specialty' | 'province' | 'internal'
-                          const isActive = activeSubMenu === subId
+                          const subId = (dropItem.id || 'specialty') as 'specialty' | 'province'
+                          const isActive = dropItem.hasSubMenu && activeSubMenu === subId
                           return (
                             <Link
                               key={dropItem.to}
                               to={dropItem.to}
-                              onMouseEnter={() => setActiveSubMenu(subId)}
-                              className={`flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors border-b border-zinc-50 last:border-none group/dd ${
-                                isActive
-                                  ? 'bg-zinc-100/90 text-zinc-900 font-semibold'
-                                  : 'text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900'
-                              }`}
+                              onMouseEnter={() => {
+                                if (dropItem.hasSubMenu && (dropItem.id === 'specialty' || dropItem.id === 'province')) {
+                                  setActiveSubMenu(dropItem.id as 'specialty' | 'province')
+                                }
+                              }}
+                              onClick={() => setHoveredItem(null)}
+                              className={`flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors border-b border-zinc-50 last:border-none group/dd ${isActive
+                                ? 'bg-zinc-100/90 text-zinc-900 font-semibold'
+                                : 'text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900'
+                                }`}
                             >
                               <span>{dropItem.label}</span>
                               {dropItem.hasSubMenu && (
                                 <ChevronRight
-                                  className={`w-4 h-4 transition-colors ${
-                                    isActive ? 'text-[#d4222f]' : 'text-zinc-400 group-hover/dd:text-zinc-600'
-                                  }`}
+                                  className={`w-4 h-4 transition-colors ${isActive ? 'text-[#d4222f]' : 'text-zinc-400 group-hover/dd:text-zinc-600'
+                                    }`}
                                 />
                               )}
                             </Link>
@@ -152,6 +183,7 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
                                 <Link
                                   key={sp.id}
                                   to={sp.to}
+                                  onClick={() => setHoveredItem(null)}
                                   className="flex items-center gap-2.5 p-1 rounded-lg hover:bg-zinc-50 transition-colors group/sp"
                                 >
                                   <div className="w-6 h-6 rounded-full bg-[#ffd400] flex items-center justify-center shrink-0 text-black shadow-xs">
@@ -174,7 +206,8 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
                                 {col.map((prov) => (
                                   <Link
                                     key={prov}
-                                    to={`#province-${encodeURIComponent(prov)}`}
+                                    to={`/jobs?province=${encodeURIComponent(prov)}`}
+                                    onClick={() => setHoveredItem(null)}
                                     className="block text-[12.5px] font-medium text-zinc-700 hover:text-[#d4222f] transition-colors leading-tight whitespace-nowrap"
                                   >
                                     {prov}
@@ -184,44 +217,33 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
                             ))}
                           </div>
                         )}
-
-                        {/* 3. Internal Jobs (Việc làm nội bộ) */}
-                        {activeSubMenu === 'internal' && (
-                          <div className="h-full min-h-[260px] flex flex-col items-center justify-center text-center p-6 bg-zinc-50/60 rounded-xl border border-dashed border-zinc-200">
-                            <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mb-3">
-                              <Users className="w-6 h-6" />
-                            </div>
-                            <h4 className="text-base font-bold text-zinc-800 mb-1">Dành riêng cho nhân viên MWG</h4>
-                            <p className="text-xs text-zinc-500 max-w-sm mb-4">
-                              Khám phá các cơ hội chuyển đổi vị trí và thăng tiến nội bộ trong tập đoàn Thế Giới Di Động.
-                            </p>
-                            <Link
-                              to="#internal"
-                              className="px-4 py-2 bg-[#d4222f] text-white text-xs font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-sm"
-                            >
-                              Xem cơ hội tuyển dụng nội bộ
-                            </Link>
-                          </div>
-                        )}
                       </div>
                     </div>
                   ) : (
                     /* Standard Dropdown Menu */
                     <div
-                      className="absolute top-full left-0 mt-0 min-w-[210px] bg-white text-zinc-800 rounded-b-xl shadow-2xl border border-zinc-100/80 py-1.5 z-50 overflow-hidden shadow-zinc-950/15"
+                      className="absolute top-full left-0 mt-1 min-w-[210px] bg-white text-zinc-900 rounded-2xl shadow-xl border border-zinc-100 p-1.5 z-50 overflow-hidden shadow-zinc-950/20"
                       style={{
                         animation: 'dropdownFadeIn 0.18s ease-out',
                       }}
                     >
-                      {item.dropdownItems.map((dropItem) => (
-                        <Link
-                          key={dropItem.to}
-                          to={dropItem.to}
-                          className="block px-5 py-3 text-sm font-medium text-zinc-800 hover:bg-zinc-50 hover:text-[#d4222f] transition-colors border-b border-zinc-100 last:border-none whitespace-nowrap"
-                        >
-                          {dropItem.label}
-                        </Link>
-                      ))}
+                      {item.dropdownItems.map((dropItem) => {
+                        const active = isSubActive(dropItem.to)
+                        return (
+                          <Link
+                            key={dropItem.to}
+                            to={dropItem.to}
+                            onClick={() => setHoveredItem(null)}
+                            className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap ${
+                              active
+                                ? 'bg-[#f0f3f7] text-slate-900 font-semibold'
+                                : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                            }`}
+                          >
+                            {dropItem.label}
+                          </Link>
+                        )
+                      })}
                     </div>
                   )
                 )}
@@ -335,7 +357,7 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
                               {PROVINCE_COLUMNS.flat().map((prov) => (
                                 <Link
                                   key={prov}
-                                  to={`#province-${encodeURIComponent(prov)}`}
+                                  to={`/jobs?province=${encodeURIComponent(prov)}`}
                                   onClick={() => setMobileMenuOpen(false)}
                                   className="py-1 px-2 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded"
                                 >

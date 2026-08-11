@@ -1,0 +1,1 @@
+export { MwgCorporateFooter } from './MwgCorporateFooter'

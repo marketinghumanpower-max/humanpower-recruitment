@@ -1,27 +1,28 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const LOCATIONS = [
-  'Hồ Chí Minh',
-  'Hà Nội',
-  'Đà Nẵng',
-  'Cần Thơ',
-  'Bình Dương',
-  'Đồng Nai',
-  'Hải Phòng',
-  'Khánh Hòa',
-  'Bà Rịa - Vũng Tàu',
-  'Bắc Ninh',
-  'Thanh Hóa',
-  'Nghệ An',
-  'Kiên Giang',
-  'Lâm Đồng',
-  'Tiền Giang',
+  'Thành phố Hồ Chí Minh',
+  'Thành phố Hà Nội',
+  'Thành phố Đà Nẵng',
+  'Thành phố Cần Thơ',
+  'Tỉnh Bình Dương',
+  'Tỉnh Đồng Nai',
+  'Thành phố Hải Phòng',
+  'Tỉnh Khánh Hoà',
+  'Tỉnh Bắc Ninh',
+  'Tỉnh Thanh Hoá',
+  'Tỉnh Nghệ An',
+  'Tỉnh Lâm Đồng',
 ]
 
 export const LocationFilter = () => {
   const { t } = useTranslation('recruitment')
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null)
+  const navigate = useNavigate()
+
+  const handleLocationClick = (loc: string) => {
+    navigate(`/jobs?province=${encodeURIComponent(loc)}`)
+  }
 
   return (
     <section className="py-8 bg-slate-50 border-b border-slate-200/60">
@@ -31,22 +32,15 @@ export const LocationFilter = () => {
         </h3>
 
         <div className="flex flex-wrap items-center gap-2">
-          {LOCATIONS.map((loc) => {
-            const isSelected = selectedLocation === loc
-            return (
-              <button
-                key={loc}
-                onClick={() => setSelectedLocation(isSelected ? null : loc)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer border ${
-                  isSelected
-                    ? 'bg-[#d70018] text-white border-[#d70018] shadow-xs'
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/80'
-                }`}
-              >
-                {loc}
-              </button>
-            )
-          })}
+          {LOCATIONS.map((loc) => (
+            <button
+              key={loc}
+              onClick={() => handleLocationClick(loc)}
+              className="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer border bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/80 active:scale-95"
+            >
+              {loc}
+            </button>
+          ))}
         </div>
       </div>
     </section>

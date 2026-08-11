@@ -1,0 +1,1 @@
+export { MwgCorporateHeader } from './MwgCorporateHeader'
