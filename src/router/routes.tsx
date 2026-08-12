@@ -77,6 +77,14 @@ export const router = createBrowserRouter([
         element: <CareerGuidePage />,
       },
       {
+        path: 'cuoc-song-mwg',
+        element: <CareerGuidePage />,
+      },
+      {
+        path: 'life-at-mwg/cuoc-song-mwg',
+        element: <CareerGuidePage />,
+      },
+      {
         path: 'career-guide',
         element: <CareerGuidePage />,
       },

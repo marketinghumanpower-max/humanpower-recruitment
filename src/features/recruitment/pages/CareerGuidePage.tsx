@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useSearchParams, useLocation } from 'react-router-dom'
 import {
   Home,
   ChevronRight,
@@ -226,10 +226,51 @@ const LATEST_JOBS: JobItem[] = [
 
 export const CareerGuidePage = () => {
   const { t } = useTranslation('recruitment')
+  const [searchParams] = useSearchParams()
+  const location = useLocation()
+
+  const getInitialTab = (): 'moi-nhat' | 'huong-nghiep' | 'cuoc-song-mwg' | 'thanh-tuu' | 'podcast' => {
+    const search = location.search || window.location.search
+    const path = location.pathname || window.location.pathname
+    const tabParam = searchParams.get('tab') || new URLSearchParams(search).get('tab')
+    if (
+      tabParam === 'cuoc-song-mwg' ||
+      tabParam === 'life-mwg' ||
+      path.includes('cuoc-song-mwg')
+    ) {
+      return 'cuoc-song-mwg'
+    }
+    if (tabParam === 'moi-nhat') return 'moi-nhat'
+    if (tabParam === 'thanh-tuu') return 'thanh-tuu'
+    if (tabParam === 'podcast') return 'podcast'
+    return 'huong-nghiep'
+  }
+
   const [activeTab, setActiveTab] = useState<
     'moi-nhat' | 'huong-nghiep' | 'cuoc-song-mwg' | 'thanh-tuu' | 'podcast'
-  >('huong-nghiep')
+  >(getInitialTab)
   const [visibleCount, setVisibleCount] = useState(10)
+
+  useEffect(() => {
+    const search = location.search || window.location.search
+    const path = location.pathname || window.location.pathname
+    const tabParam = searchParams.get('tab') || new URLSearchParams(search).get('tab')
+    if (
+      tabParam === 'cuoc-song-mwg' ||
+      tabParam === 'life-mwg' ||
+      path.includes('cuoc-song-mwg')
+    ) {
+      setActiveTab('cuoc-song-mwg')
+    } else if (tabParam === 'moi-nhat') {
+      setActiveTab('moi-nhat')
+    } else if (tabParam === 'thanh-tuu') {
+      setActiveTab('thanh-tuu')
+    } else if (tabParam === 'podcast') {
+      setActiveTab('podcast')
+    } else if (tabParam === 'huong-nghiep') {
+      setActiveTab('huong-nghiep')
+    }
+  }, [searchParams, location.search, location.pathname])
 
   const filteredArticles = ARTICLES_DATA.filter((article) => {
     if (activeTab === 'moi-nhat') return true

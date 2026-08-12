@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { motion, type Variants } from 'framer-motion'
 
 const BRANDS = [
   { id: 'tgdd', name: 'TGĐĐ', label: 'Thế Giới Di Động', bg: 'bg-[#ffd400]', textColor: 'text-black' },
@@ -11,12 +12,38 @@ const BRANDS = [
   { id: 'erablue', name: 'erablue', label: 'Erablue Electronics', bg: 'bg-[#002f6c]', textColor: 'text-white' },
 ]
 
+const gridVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.05,
+    },
+  },
+}
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: 'easeOut' },
+  },
+}
+
 export const BrandSection = () => {
   const { t } = useTranslation('recruitment')
 
   return (
-    <section className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <section className="py-12 bg-white overflow-hidden">
+      <motion.div
+        variants={gridVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.05 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 transform-gpu"
+      >
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
           {t('brand.titlePrefix')}
           <span className="text-[#d70018]">{t('brand.titleHighlight')}</span>
@@ -24,23 +51,27 @@ export const BrandSection = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {BRANDS.map((brand) => (
-            <div
+            <motion.div
               key={brand.id}
-              className="group border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:shadow-md hover:border-slate-300 transition-all duration-200 cursor-pointer bg-white"
+              variants={cardVariants}
+              whileHover={{ y: -4, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              className="group border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:shadow-lg hover:border-slate-300 transition-shadow duration-200 cursor-pointer bg-white"
             >
               <div
-                className={`w-full h-12 rounded-lg ${brand.bg} ${brand.textColor} flex items-center justify-center font-extrabold text-xs tracking-tight shadow-xs group-hover:scale-105 transition-transform`}
+                className={`w-full h-12 rounded-lg ${brand.bg} ${brand.textColor} flex items-center justify-center font-extrabold text-xs tracking-tight shadow-xs group-hover:scale-105 transition-transform duration-300`}
               >
                 {brand.name}
               </div>
               <span className="text-[11px] font-semibold text-slate-500 group-hover:text-slate-900 transition-colors text-center line-clamp-1">
                 {brand.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
+
 

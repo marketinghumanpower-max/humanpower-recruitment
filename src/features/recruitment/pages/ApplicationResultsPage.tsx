@@ -1,18 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  Search,
   CheckCircle2,
-  Clock,
   MapPin,
   Calendar,
   AlertCircle,
-  FileText,
-  UserCheck,
-  Building2,
   RefreshCw,
 } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
 
 interface ApplicationResult {
   candidateName: string
@@ -29,8 +23,6 @@ interface ApplicationResult {
 }
 
 export const ApplicationResultsPage = () => {
-  const { t } = useTranslation('recruitment')
-
   const [cccd, setCccd] = useState('')
   const [phone, setPhone] = useState('')
   const [errorMsg, setErrorMsg] = useState('')

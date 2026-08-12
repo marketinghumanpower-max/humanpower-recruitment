@@ -42,10 +42,9 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
       to: '/phuc-loi',
       hasDropdown: true,
       dropdownItems: [
-        { id: 'life-mwg', label: t('header.lifeMwg'), to: '/phuc-loi' },
+        { id: 'life-mwg', label: t('header.lifeMwg'), to: '/cuoc-song-mwg' },
         { id: 'benefits', label: t('header.lifeBenefits'), to: '/phuc-loi' },
         { id: 'advancement', label: t('header.lifeAdvancement'), to: '/thang-tien' },
-        { id: 'comeback', label: t('header.lifeComeback'), to: '#comeback' },
       ],
     },
     { label: t('header.careerGuide'), to: '/huong-nghiep' },
@@ -67,6 +66,12 @@ export const AppHeader = ({ navItems }: AppHeaderProps) => {
 
   const isSubActive = (dropTo: string) => {
     const currentPath = location.pathname
+    if (dropTo === '/cuoc-song-mwg' || dropTo.includes('cuoc-song-mwg')) {
+      return (
+        currentPath === '/cuoc-song-mwg' ||
+        (currentPath === '/huong-nghiep' && location.search.includes('cuoc-song-mwg'))
+      )
+    }
     if (dropTo === '/gioi-thieu') {
       return (
         currentPath === '/gioi-thieu' ||

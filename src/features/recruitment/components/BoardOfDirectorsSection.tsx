@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Quote, Award, ShieldCheck, UserCheck, Info, X, CheckCircle2, ChevronRight } from 'lucide-react'
+import { motion, type Variants } from 'framer-motion'
 
 interface DirectorMember {
   id: string
@@ -13,6 +14,26 @@ interface DirectorMember {
   experienceYears: string
   bio: string
   highlights: string[]
+}
+
+const gridVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.05,
+    },
+  },
+}
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: 'easeOut' },
+  },
 }
 
 export const BoardOfDirectorsSection = () => {
@@ -124,8 +145,14 @@ export const BoardOfDirectorsSection = () => {
   ]
 
   return (
-    <section id="board-of-directors" className="py-14 bg-white border-y border-slate-200/90 scroll-mt-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="board-of-directors" className="py-14 bg-white border-y border-slate-200/90 scroll-mt-20 relative overflow-hidden">
+      <motion.div
+        variants={gridVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.05 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transform-gpu"
+      >
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-[#d4222f] text-xs font-extrabold uppercase tracking-wider">
@@ -143,9 +170,11 @@ export const BoardOfDirectorsSection = () => {
         {/* Directors Cards Grid (6 Members) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {directors.map((member) => (
-            <div
+            <motion.div
               key={member.id}
-              className="group bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 relative overflow-hidden"
+              variants={cardVariants}
+              whileHover={{ y: -4 }}
+              className="group bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
             >
               {/* Top Accent Line */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#ffd400] to-[#d4222f] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -157,7 +186,7 @@ export const BoardOfDirectorsSection = () => {
                     <img
                       src={member.avatarUrl}
                       alt={member.name}
-                      className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform"
+                      className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#ffd400] text-black flex items-center justify-center text-[10px] font-black shadow-xs">
                       ★
@@ -198,10 +227,11 @@ export const BoardOfDirectorsSection = () => {
                   <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
+
 
       {/* Member Bio Detail Modal */}
       {selectedDirector && (
