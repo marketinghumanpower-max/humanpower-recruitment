@@ -1,17 +1,26 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Briefcase, MapPin, Search } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { SPECIALTY_ITEMS, PROVINCE_COLUMNS } from '@/components/AppHeader/AppHeader.data'
 
 export const JobSearchBar = () => {
   const { t } = useTranslation('recruitment')
+  const navigate = useNavigate()
   const [industry, setIndustry] = useState('')
   const [location, setLocation] = useState('')
   const [keyword, setKeyword] = useState('')
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Search:', { industry, location, keyword })
+    const params = new URLSearchParams()
+    if (industry) params.set('specialty', industry)
+    if (location) params.set('province', location)
+    if (keyword.trim()) params.set('q', keyword.trim())
+    
+    navigate(`/jobs?${params.toString()}`)
   }
+
 
   return (
     <form
@@ -24,15 +33,14 @@ export const JobSearchBar = () => {
         <select
           value={industry}
           onChange={(e) => setIndustry(e.target.value)}
-          className="w-full bg-transparent text-sm text-slate-800 font-medium focus:outline-none cursor-pointer"
+          className="w-full bg-transparent text-sm text-slate-800 font-medium focus:outline-none cursor-pointer truncate"
         >
           <option value="">{t('search.industry')}</option>
-          <option value="ban-hang">{t('search.industries.sales')}</option>
-          <option value="kho-trung-tam">{t('search.industries.warehouse')}</option>
-          <option value="it-phan-mem">{t('search.industries.it')}</option>
-          <option value="hanh-chinh-hr">{t('search.industries.hr')}</option>
-          <option value="marketing">{t('search.industries.marketing')}</option>
-          <option value="ky-thuat">{t('search.industries.technical')}</option>
+          {SPECIALTY_ITEMS.map((sp) => (
+            <option key={sp.id} value={sp.id}>
+              {sp.label}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -42,16 +50,14 @@ export const JobSearchBar = () => {
         <select
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="w-full bg-transparent text-sm text-slate-800 font-medium focus:outline-none cursor-pointer"
+          className="w-full bg-transparent text-sm text-slate-800 font-medium focus:outline-none cursor-pointer truncate"
         >
           <option value="">{t('search.location')}</option>
-          <option value="hcm">{t('search.locations.hcm')}</option>
-          <option value="hanoi">{t('search.locations.hanoi')}</option>
-          <option value="danang">{t('search.locations.danang')}</option>
-          <option value="cantho">{t('search.locations.cantho')}</option>
-          <option value="binhduong">{t('search.locations.binhduong')}</option>
-          <option value="dongnai">{t('search.locations.dongnai')}</option>
-          <option value="haiphong">{t('search.locations.haiphong')}</option>
+          {PROVINCE_COLUMNS.flat().map((prov) => (
+            <option key={prov} value={prov}>
+              {prov}
+            </option>
+          ))}
         </select>
       </div>
 

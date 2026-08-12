@@ -58,7 +58,7 @@ export const AppFooter = ({ companyName = 'MWG' }: AppFooterProps) => {
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">{t('footer.aboutTitle')}</h4>
             <ul className="space-y-2 text-zinc-400">
               <li>
-                <Link to="#about" className="hover:text-white transition-colors">
+                <Link to="/gioi-thieu" className="hover:text-white transition-colors">
                   {t('footer.aboutIntro')}
                 </Link>
               </li>

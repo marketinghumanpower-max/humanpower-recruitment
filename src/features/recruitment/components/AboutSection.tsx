@@ -1,7 +1,28 @@
 import { useState } from 'react'
 import { Play, Square } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { motion, type Variants } from 'framer-motion'
 import heroImg from '@/assets/hero.png'
+
+const listVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease: 'easeOut' },
+  },
+}
 
 export const AboutSection = () => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -16,11 +37,17 @@ export const AboutSection = () => {
   ]
 
   return (
-    <section id="about" className="py-14 bg-slate-50 border-y border-slate-200/80 scroll-mt-16">
+    <section id="about" className="py-14 bg-slate-50 border-y border-slate-200/80 scroll-mt-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Vision & Strengths */}
-          <div className="lg:col-span-7 space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="lg:col-span-7 space-y-5 transform-gpu"
+          >
             <span className="text-xs font-bold text-[#d70018] uppercase tracking-wider">
               {t('about.kicker')}
             </span>
@@ -29,20 +56,32 @@ export const AboutSection = () => {
               <span className="text-[#d70018]">{t('about.title')}</span>
             </h2>
 
-            <ul className="space-y-3.5 pt-2">
+            <motion.ul
+              variants={listVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.05 }}
+              className="space-y-3.5 pt-2"
+            >
               {highlights.map((point, index) => (
-                <li key={index} className="flex items-start gap-3">
+                <motion.li key={index} variants={itemVariants} className="flex items-start gap-3">
                   <Square className="w-2.5 h-2.5 text-[#d70018] fill-[#d70018] mt-1.5 shrink-0" />
                   <span className="text-sm font-medium text-slate-700 leading-relaxed">
                     {point}
                   </span>
-                </li>
+                </motion.li>
               ))}
-            </ul>
-          </div>
+            </motion.ul>
+          </motion.div>
 
           {/* Right Column: Video Showcase Card */}
-          <div className="lg:col-span-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="lg:col-span-5 transform-gpu"
+          >
             <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-900 group aspect-video">
               {!isPlaying ? (
                 <>
@@ -52,13 +91,15 @@ export const AboutSection = () => {
                     className="w-full h-full object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => setIsPlaying(true)}
-                      className="w-16 h-16 rounded-full bg-white/90 text-[#d70018] flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-white transition-all cursor-pointer"
+                      className="w-16 h-16 rounded-full bg-white/90 text-[#d70018] flex items-center justify-center shadow-2xl hover:bg-white transition-colors cursor-pointer"
                       aria-label="Play video"
                     >
                       <Play className="w-7 h-7 fill-[#d70018] ml-1" />
-                    </button>
+                    </motion.button>
                   </div>
                 </>
               ) : (
@@ -71,10 +112,11 @@ export const AboutSection = () => {
                 />
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   )
 }
+
 
