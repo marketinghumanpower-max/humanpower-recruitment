@@ -364,61 +364,65 @@ export const JobSearchPage = () => {
         {/* Job Cards List / Grid (Matching exact screenshot styling) */}
         {filteredJobs.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredJobs.map((job) => (
-              <div
-                key={job.id}
-                className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group"
-              >
-                <div className="flex items-start gap-3">
-                  {/* Left Avatar Icon Box */}
-                  <div className="w-10 h-10 rounded-lg bg-sky-100/70 border border-sky-200/60 flex items-center justify-center shrink-0 mt-0.5">
-                    <User className="w-5 h-5 text-sky-600" />
-                  </div>
+            {filteredJobs.map((job) => {
+              const jobDetailPath = job.id === 'job-1' || job.brand === 'bhx'
+                ? '/tuyen-dung/nhan-vien-sieu-thi-bach-hoa-xanh-45'
+                : `/tuyen-dung/${job.id}`
 
-                  {/* Middle Content */}
-                  <div className="flex-1 min-w-0 space-y-1.5">
-                    {/* Title with optional HOT badge */}
-                    <h3 className="text-sm sm:text-[15px] font-bold text-zinc-900 group-hover:text-[#1877f2] transition-colors leading-snug line-clamp-2">
-                      {job.isHot && (
-                        <span className="inline-block bg-[#d70018] text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded mr-1.5 tracking-wide align-middle">
-                          HOT
-                        </span>
-                      )}
-                      <span>{job.title}</span>
-                    </h3>
+              return (
+                <Link
+                  key={job.id}
+                  to={jobDetailPath}
+                  className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group cursor-pointer block"
+                >
+                  <div className="flex items-start gap-3">
+                    {/* Left Avatar Icon Box */}
+                    <div className="w-10 h-10 rounded-lg bg-sky-100/70 border border-sky-200/60 flex items-center justify-center shrink-0 mt-0.5">
+                      <User className="w-5 h-5 text-sky-600" />
+                    </div>
 
-                    {/* Metadata details line */}
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500 font-medium">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                        <span className="truncate max-w-[150px]">{job.locationText}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                        <span>{job.quantity}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <DollarSign className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                        <span>{job.salary}</span>
+                    {/* Middle Content */}
+                    <div className="flex-1 min-w-0 space-y-1.5">
+                      {/* Title with optional HOT badge */}
+                      <h3 className="text-sm sm:text-[15px] font-bold text-zinc-900 group-hover:text-[#1877f2] transition-colors leading-snug line-clamp-2">
+                        {job.isHot && (
+                          <span className="inline-block bg-[#d70018] text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded mr-1.5 tracking-wide align-middle">
+                            HOT
+                          </span>
+                        )}
+                        <span className="group-hover:underline">{job.title}</span>
+                      </h3>
+
+                      {/* Metadata details line */}
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500 font-medium">
+                        <div className="flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                          <span className="truncate max-w-[150px]">{job.locationText}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                          <span>{job.quantity}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <DollarSign className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                          <span>{job.salary}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Card Footer: Deadline on left/right & Apply Link */}
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 font-medium">
-                    Hạn nộp {job.deadline}
-                  </span>
-                  <Link
-                    to={`#apply-${job.id}`}
-                    className="font-bold text-[#1877f2] hover:underline hover:text-blue-700 transition-colors"
-                  >
-                    Ứng tuyển
-                  </Link>
-                </div>
-              </div>
-            ))}
+                  {/* Card Footer: Deadline on left/right & Apply Link */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span className="text-zinc-400 font-medium">
+                      Hạn nộp {job.deadline}
+                    </span>
+                    <span className="font-bold text-[#1877f2] group-hover:underline group-hover:text-blue-700 transition-colors">
+                      Ứng tuyển
+                    </span>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         ) : (
           /* Empty state if no jobs match */

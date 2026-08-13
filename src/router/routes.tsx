@@ -1,7 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { MainLayout } from '@/layouts/MainLayout'
 import App from '@/App'
-import { JobSearchPage, InternalJobsPage, GeneralAboutPage, BoardOfDirectorsPage, BenefitsPage, AdvancementPage, CareerGuidePage, ApplicationResultsPage } from '@/features/recruitment'
+import {
+  JobSearchPage,
+  InternalJobsPage,
+  GeneralAboutPage,
+  BoardOfDirectorsPage,
+  BenefitsPage,
+  AdvancementPage,
+  CareerGuidePage,
+  ApplicationResultsPage,
+  SupermarketJobDetailPage,
+  JobApplicationPage,
+} from '@/features/recruitment'
 
 export const router = createBrowserRouter([
   {
@@ -13,9 +24,38 @@ export const router = createBrowserRouter([
         element: <App />,
       },
       {
+        path: 'ho-so/cong-tac-vien-part-time-sieu-thi-bach-hoa-xanh-258',
+        element: <JobApplicationPage />,
+      },
+      {
+        path: 'ho-so/nhan-vien-sieu-thi-bach-hoa-xanh-45',
+        element: <JobApplicationPage />,
+      },
+      {
+        path: 'ho-so/:jobId',
+        element: <JobApplicationPage />,
+      },
+      {
+        path: 'apply',
+        element: <JobApplicationPage />,
+      },
+      {
+        path: 'tuyen-dung/nhan-vien-sieu-thi-bach-hoa-xanh-45',
+        element: <SupermarketJobDetailPage />,
+      },
+      {
+        path: 'tuyen-dung/:jobId',
+        element: <SupermarketJobDetailPage />,
+      },
+      {
+        path: 'job/:jobId',
+        element: <SupermarketJobDetailPage />,
+      },
+      {
         path: 'jobs',
         element: <JobSearchPage />,
       },
+
       {
         path: 'tim-viec',
         element: <JobSearchPage />,

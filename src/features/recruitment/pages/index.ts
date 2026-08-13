@@ -6,4 +6,5 @@ export { BenefitsPage } from './BenefitsPage'
 export { AdvancementPage } from './AdvancementPage'
 export { CareerGuidePage } from './CareerGuidePage'
 export { ApplicationResultsPage } from './ApplicationResultsPage'
-
+export { SupermarketJobDetailPage, SupermarketJobDetailPage as JobDetailPage, SupermarketJobDetailPage as BachHoaXanhJobDetailPage } from './SupermarketJobDetailPage'
+export { JobApplicationPage } from './JobApplicationPage'

@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Search,
   ChevronDown,
@@ -201,7 +202,9 @@ export const InternalJobsPage = () => {
 
               <div className="space-y-2 pr-12">
                 <h3 className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-[#d4222f] transition-colors leading-snug">
-                  {job.title}
+                  <Link to="/tuyen-dung/nhan-vien-sieu-thi-bach-hoa-xanh-45" className="hover:underline">
+                    {job.title}
+                  </Link>
                 </h3>
                 <p className="text-xs text-zinc-500 font-medium">
                   {job.brand} | {job.department}
